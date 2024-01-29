@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function loadMaterie() {
-  var select = document.getElementById('materia');
+  var select = document.getElementById('Specificare esame:');
   
   // Chiamata AJAX per ottenere elenco materie dal foglio di calcolo
   // Puoi utilizzare Fetch API o jQuery.ajax
 
   // Esempio con Fetch API
-  fetch('https://docs.google.com/spreadsheets/d/TUO_ID_FOGLIO_DI_CALCOLO/pub?gid=0&single=true&output=csv')
+  fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vT-TGpR6oVmdWO8Gp7oOWfztnmOuigV-C0XHy6DKx6CmYcDAZiENQp8f3HGI4pgbKIHPGJIuRU9Oio5/pubhtml?gid=682533116&single=true')
     .then(response => response.text())
     .then(data => {
       var lines = data.split('\n');
