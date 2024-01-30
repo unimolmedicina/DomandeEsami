@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Sheets Integration</title>
+  <title>Google Sheets Integration with Filter</title>
 </head>
 <body>
+
+<label for="filterInput">Filtra per testo:</label>
+<input type="text" id="filterInput" oninput="filterTable()" placeholder="Inserisci testo...">
 
 <table id="myTable">
   <thead>
@@ -22,50 +25,60 @@
 
 <script src="https://apis.google.com/js/api.js"></script>
 <script>
-  // Funzione per caricare e visualizzare i dati
+  let allData = [];
+
   function loadGoogleSheet() {
-    // Carica le credenziali dal file JSON
     const credentials = {
       apiKey: ' AIzaSyBwtQ2A0fyHiygMA-cVaT_kpMQHLVygbmQ',
       // Inserisci le tue credenziali qui
     };
 
-    // Configura l'oggetto di autorizzazione
     gapi.load('client', () => {
       gapi.client.init({
         apiKey: credentials.apiKey,
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
       }).then(() => {
-        // Specifica il foglio di lavoro e l'intervallo di celle da leggere
         const spreadsheetId = '1Z7WnliBu1uSRiE5f1r41cdMt4Y-yzoZExpeNtwItMzU';
-        const range = 'RISPOSTE!A1:B10'; // Personalizza con il tuo foglio di lavoro
+        const range = 'RISPOSTE!B1:C30';
 
-        // Ottieni i dati dal foglio di lavoro
         return gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId,
           range,
         });
       }).then((response) => {
         const values = response.result.values;
-
-        // Ottieni il riferimento alla tabella HTML
-        const table = document.getElementById('myTable');
-
-        // Aggiungi le righe alla tabella
-        values.forEach((row) => {
-          const newRow = table.insertRow();
-          row.forEach((cell) => {
-            const newCell = newRow.insertCell();
-            newCell.appendChild(document.createTextNode(cell));
-          });
-        });
+        allData = values;
+        populateTable(allData);
       }, (error) => {
         console.error('Errore durante la lettura dei dati:', error.result.error.message);
       });
     });
   }
 
-  // Carica l'API di Google Sheets
+  function filterTable() {
+    const filterValue = document.getElementById('filterInput').value.toLowerCase();
+    const filteredData = allData.filter(row => {
+      return row.some(cell => cell.toLowerCase().includes(filterValue));
+    });
+    populateTable(filteredData);
+  }
+
+  function populateTable(data) {
+    const table = document.getElementById('myTable');
+
+    while (table.rows.length > 1) {
+      table.deleteRow(1);
+    }
+
+    data.forEach(row => {
+      const newRow = table.insertRow();
+      row.forEach(cell => {
+        const newCell = newRow.insertCell();
+        newCell.appendChild(document.createTextNode(cell));
+      });
+    });
+  }
+
   gapi.load('client:auth2', loadGoogleSheet);
 </script>
 
