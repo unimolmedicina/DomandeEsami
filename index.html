@@ -11,21 +11,38 @@
 </head>
 <body>
 
-<label for="filterInput">Filtra per testo:</label>
-<input type="text" id="filterInput" oninput="filterTable()" placeholder="Inserisci testo..." class="form-control">
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>UNIMOL MEDICINA</h2>
+      <p>In questa pagina sono inserite le domande dei vari esami che sono state caricate dai voi studenti</p>
+    </div>
+  </div>
+<div class="row mt-3">
+  <div class="col-md-6">
+    <label for="filterInput">Filtra per testo:</label>
+    <input type="text" id="filterInput" oninput="filterTable()" placeholder="Inserisci testo..." class="form-control">
+  </div>
+</div>
 
-<table id="myTable" class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th>Colonna 1</th>
-      <th>Colonna 2</th>
-      <!-- Aggiungi ulteriori colonne se necessario -->
-    </tr>
-  </thead>
-  <tbody>
-    <!-- I dati verranno inseriti qui dinamicamente -->
-  </tbody>
-</table>
+<div class="row mt-3">
+  <div class="col-md-6">
+    <h3>Risultati</h3>
+    <table id="myTable" class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Colonna 1</th>
+          <th>Colonna 2</th>
+          <!-- Aggiungi ulteriori colonne se necessario -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- I dati verranno inseriti qui dinamicamente -->
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
 
 <script src="https://apis.google.com/js/api.js"></script>
 <script>
