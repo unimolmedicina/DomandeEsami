@@ -31,8 +31,9 @@
     <table id="myTable" class="table">
       <thead class="thead-dark">
         <tr>
-          <th>Colonna 1</th>
-          <th>Colonna 2</th>
+          <th>Materia</th>
+          <th>Domanda</th>
+          <th>Annotazioni</th>
           <!-- Aggiungi ulteriori colonne se necessario -->
         </tr>
       </thead>
@@ -60,7 +61,7 @@
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
       }).then(() => {
         const spreadsheetId = '1Z7WnliBu1uSRiE5f1r41cdMt4Y-yzoZExpeNtwItMzU';
-        const range = 'RISPOSTE!B1:C30';
+        const range = 'RISPOSTE!B2:D30';
 
         return gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId,
